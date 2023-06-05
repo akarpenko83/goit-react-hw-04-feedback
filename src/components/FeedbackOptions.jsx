@@ -4,61 +4,24 @@ import PropTypes from 'prop-types';
 import { Button } from './feedback.styled';
 
 export default function FeedbackOptions({
-    onLeaveGoodFeedback,
-    onLeaveBadFeedback,
-    onLeaveNeutralFeedback,
+    options,
+    onLeaveFeedback,
 }) {
     return (
         <div>
-            <Button
-                type="button"
-                onClick={onLeaveGoodFeedback}
-            >
-                GOOD
-            </Button>
-            <Button
-                type="button"
-                onClick={onLeaveBadFeedback}
-            >
-                BAD
-            </Button>
-            <Button
-                type="button"
-                onClick={onLeaveNeutralFeedback}
-            >
-                neutral
-            </Button>
+            {options.map(option => (
+                <Button
+                    key={option}
+                    type="button"
+                    onClick={() => onLeaveFeedback(option)}
+                >
+                    {option}
+                </Button>
+            ))}
         </div>
     );
 }
 FeedbackOptions.propTypes = {
-    // options: PropTypes.array.isRequired,
-    onLeaveGoodFeedback: PropTypes.func.isRequired,
+    options: PropTypes.array.isRequired,
+    onLeaveFeedback: PropTypes.func.isRequired,
 };
-
-/* 
-                <Button type="button" onClick={onLeaveFeedback}>
-                {good}
-            </Button>
-            <Button type="button" onClick={onLeaveFeedback}>
-                {neutral}
-            </Button>
-            <Button type="button" onClick={onLeaveFeedback}>
-                {bad}
-            </Button>
-*/
-/*           
-{
-                options.map(option => (
-                    <Button
-                        key={option}
-                        type="button"
-                        onClick={() =>
-                            onLeaveFeedback(option)
-                        }
-                    >
-                        {option}
-                    </Button>
-                ));
-            }
-*/

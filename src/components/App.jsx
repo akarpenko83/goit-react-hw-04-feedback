@@ -13,14 +13,20 @@ const App = () => {
     const [total, setTotal] = useState(0);
     const [posPercent, setPosPercent] = useState(0);
 
-    const onGoodFeedback = () => {
-        setGood(good + 1);
-    };
-    const onBadFeedback = () => {
-        setBad(bad + 1);
-    };
-    const onNeutralFeedback = () => {
-        setNeutral(neutral + 1);
+    const onLeaveFeedback = option => {
+        switch (option) {
+            case 'good':
+                setGood(good + 1);
+                break;
+            case 'bad':
+                setBad(bad + 1);
+                break;
+            case 'neutral':
+                setNeutral(neutral + 1);
+                break;
+            default:
+                break;
+        }
     };
 
     useEffect(() => {
@@ -36,9 +42,8 @@ const App = () => {
     return (
         <Section>
             <FeedbackOptions
-                onLeaveNeutralFeedback={onNeutralFeedback}
-                onLeaveGoodFeedback={onGoodFeedback}
-                onLeaveBadFeedback={onBadFeedback}
+                options={['good', 'neutral', 'bad']}
+                onLeaveFeedback={onLeaveFeedback}
             ></FeedbackOptions>
             {total ? (
                 <Statistics
