@@ -37,7 +37,9 @@ const App = () => {
         setPosPercent(Math.round((good / total) * 100));
     }, [good, total]);
 
-    window.onload = background;
+    useEffect(() => {
+        window.onload = background;
+    }, []);
 
     return (
         <Section>
