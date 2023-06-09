@@ -10,8 +10,6 @@ const App = () => {
     const [good, setGood] = useState(0);
     const [bad, setBad] = useState(0);
     const [neutral, setNeutral] = useState(0);
-    const [total, setTotal] = useState(0);
-    const [posPercent, setPosPercent] = useState(0);
 
     const onLeaveFeedback = option => {
         switch (option) {
@@ -29,13 +27,13 @@ const App = () => {
         }
     };
 
-    useEffect(() => {
-        setTotal(good + bad + neutral);
-    }, [bad, good, neutral]);
+    const getTotal = () => {
+        return good + bad + neutral;
+    };
 
-    useEffect(() => {
-        setPosPercent(Math.round((good / total) * 100));
-    }, [good, total]);
+    const getPosPercent = () => {
+        return Math.round((good / getTotal()) * 100);
+    };
 
     useEffect(() => {
         window.onload = background;
@@ -47,13 +45,13 @@ const App = () => {
                 options={['good', 'neutral', 'bad']}
                 onLeaveFeedback={onLeaveFeedback}
             ></FeedbackOptions>
-            {total ? (
+            {getTotal() ? (
                 <Statistics
                     good={good}
                     neutral={neutral}
                     bad={bad}
-                    total={total}
-                    posPercent={posPercent}
+                    total={getTotal()}
+                    posPercent={getPosPercent()}
                 ></Statistics>
             ) : (
                 <Notification message="There is no feedback" />
